@@ -1,9 +1,9 @@
-function [testDataX, testDataY] = loadTestData(fileName)
+function [testDataX, testDataY] = loadTestData(testData)
 
-data = load(fileName);
-data_col = size(data,2);
-X = data(:, 1:(data_col-1));
-y = data(:, data_col);
+
+data_col = size(testData,2);
+X = testData(:, 1:(data_col-1));
+y = testData(:, data_col);
 m = length(y);
 
 testDataX = X;

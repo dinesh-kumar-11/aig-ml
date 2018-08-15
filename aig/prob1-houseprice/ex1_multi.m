@@ -33,12 +33,27 @@ clear ; close all; clc
 
 fprintf('Loading data ...\n');
 
+%Load All Data
+allData = load('house_all_clean.csv');
+allRowDataSize = size(allData,1)
+trainPercentageRows = round((80/100)*allRowDataSize)
+trainData = allData(1:trainPercentageRows,:);
+% Print out some data points
+fprintf('First 5 examples from the trainData dataset: \n');
+fprintf(' trainData = ;');
+trainData(1:5, :)
+testData = allData(trainPercentageRows+1:allRowDataSize,:);
+% Print out some data points
+fprintf('First 5 examples from the testData dataset: \n');
+fprintf(' testData = ;');
+testData(1:5, :)
+
+pause;
 
 %% Load Data
-data = load('house_train_clean.csv');
-data_col = size(data,2)
-X = data(:, 1:(data_col-1));
-y = data(:, data_col);
+data_col = size(trainData,2)
+X = trainData(:, 1:(data_col-1));
+y = trainData(:, data_col);
 m = length(y);
 
 % Print out some data points
@@ -109,7 +124,7 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
-[testDataX, testDataY] = loadTestData("house_test_clean.csv");
+[testDataX, testDataY] = loadTestData(testData);
 
 % Normalize the test based on mean and sigma from test data
 testDataX = featureNormalizeTest(testDataX, mu, sigma);
@@ -140,10 +155,9 @@ fprintf('Solving with normal equations...\n');
 %
 
 %% Load Data
-data = csvread('house_train_clean.csv');
-data_col = size(data,2)
-X = data(:, 1:(data_col-1));
-y = data(:, data_col);
+data_col = size(trainData,2)
+X = trainData(:, 1:(data_col-1));
+y = trainData(:, data_col);
 m = length(y);
 
 % Add intercept term to X
@@ -159,7 +173,7 @@ fprintf('\n');
 
 
 % ====================== Testing Data and RMSE ======================
-[testDataX, testDataY] = loadTestData('house_test_clean.csv');
+[testDataX, testDataY] = loadTestData(testData);
 
 % Add intercept term to X
 testDataX = [ones(size(testDataX, 1), 1) testDataX];
@@ -173,10 +187,9 @@ pause;
 
 % OLS Regression in Octave
 
-data = csvread('house_train_clean.csv');
-data_col = size(data,2)
-olsX = data(:, 1:(data_col-1));
-olsY = data(:, data_col);
+data_col = size(trainData,2)
+olsX = trainData(:, 1:(data_col-1));
+olsY = trainData(:, data_col);
 % Add intercept term to X
 olsX = [ones(m, 1) olsX];
 [BETA, SIGMA, R] = ols (olsY, olsX);
@@ -185,7 +198,7 @@ fprintf('The values of Theta, Sigma, R from OLS regression is ');
 BETA
 SIGMA
 % ====================== YOUR CODE HERE ======================
-[testDataX, testDataY] = loadTestData('house_test_clean.csv');
+[testDataX, testDataY] = loadTestData(testData);
 
 % Add intercept term to X
 testDataX = [ones(size(testDataX, 1), 1) testDataX];
