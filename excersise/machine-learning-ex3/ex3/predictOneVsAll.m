@@ -30,9 +30,9 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-
-
-
+g=sigmoid(X*all_theta');
+[predictionMaximum, indexMaximum]=max(g, [], 2);
+p=indexMaximum;
 
 
 

@@ -204,3 +204,51 @@ SIGMA
 testDataX = [ones(size(testDataX, 1), 1) testDataX];
 
 [RMSE, PredictedYAndActualY, predictedY] = testHypothesis(testDataX,testDataY, BETA,"OLS");
+
+fprintf('Program paused. Press enter to continue.\n');
+pause;
+
+% ================ Part 3: Normal Equations ================
+
+fprintf('Solving with regularized normal equations...\n');
+
+% ====================== YOUR CODE HERE ======================
+% Instructions: The following code computes the closed form 
+%               solution for linear regression using the normal
+%               equations. You should complete the code in 
+%               normalEqn.m
+%
+%               After doing so, you should complete this code 
+%               to predict the price of a 1650 sq-ft, 3 br house.
+%
+
+%% Load Data
+data_col = size(trainData,2)
+X = trainData(:, 1:(data_col-1));
+y = trainData(:, data_col);
+m = length(y);
+
+% Add intercept term to X
+X = [ones(m, 1) X];
+
+% Calculate the parameters from the normal equation
+theta = normalEqnRegularized(X, y, 800);
+
+% Display normal equation's result
+fprintf('Theta computed from the normal equations: \n');
+fprintf(' %f \n', theta);
+fprintf('\n');
+
+
+% ====================== Testing Data and RMSE ======================
+[testDataX, testDataY] = loadTestData(testData);
+
+% Add intercept term to X
+testDataX = [ones(size(testDataX, 1), 1) testDataX];
+
+[RMSE, PredictedYAndActualY, predictedY] = testHypothesis(testDataX,testDataY, theta,"Normal Eq Regularized");
+
+fprintf('Program paused. Press enter to continue.\n');
+pause;
+
+% ============================================================

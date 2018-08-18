@@ -20,9 +20,16 @@ p = zeros(size(X, 1), 1);
 %       information see 'help max'. If your examples are in rows, then, you
 %       can use max(A, [], 2) to obtain the max for each row.
 %
+%b = [ones(size(b, 1), 1) b];
 
 
-
+a1=[ones(size(X,1),1) X];
+a2=sigmoid(a1*Theta1');
+a2=[ones(size(X,1),1) a2];
+secOut = a2*Theta2';
+hypothesis = sigmoid(secOut);
+[predictionMaximum, indexMaximum]=max(hypothesis, [], 2);
+p=indexMaximum;
 
 
 

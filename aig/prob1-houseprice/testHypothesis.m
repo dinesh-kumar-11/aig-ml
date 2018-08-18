@@ -14,8 +14,6 @@ endfor
 fprintf("Predicted Price, actual Price in  %s... \n", algorithmName);
 
 PredictedYAndActualY = horzcat(predictedY, testDataY);
-
-fprintf('results from %s regression...', algorithmName)
 PredictedYAndActualY(1:5,:)
 fprintf('....Modify code to see all values \n')
 
