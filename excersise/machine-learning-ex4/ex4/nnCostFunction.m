@@ -98,15 +98,20 @@ J= J+regularization;
 %---- The below is done afrer randInitiazeWeights and SignmoidGradient ----%
 d3=a3.-yMat;
 d2=(d3*Theta2).* sigmoidGradient([ones(size(z2, 1), 1) z2]);
-d2 = d2(:, 2:end);
-
+%size(d2)
+d2 = d2(:, 2:end); % remove the two colums added
+%size(d2)
 
 delta2=d3'*a2;
 delta1=d2'*a1;
 
 % calculate regularized gradient
+%The goal is that regularization of the gradient should not change the theta gradient(:,1) values (for the bias units) calculated in Step 8.
+% So go from col 2 in theta, to adjust add zeros to first col
 theta1_penalty = (lambda/m)*[zeros(size(Theta1, 1), 1) Theta1(:, 2:end)];
 theta2_penalty = (lambda/m)*[zeros(size(Theta2, 1), 1) Theta2(:, 2:end)];
+% Always remember that the delta/m is elementwise operation as
+% the forloop will divide element wise  
 Theta1_grad = delta1./m + theta1_penalty;
 Theta2_grad = delta2./m + theta2_penalty;
 % -------------------------------------------------------------
