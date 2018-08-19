@@ -16,6 +16,11 @@ fprintf("Predicted Price, actual Price in  %s... \n", algorithmName);
 PredictedYAndActualY = horzcat(predictedY, testDataY);
 PredictedYAndActualY(1:5,:)
 fprintf('....Modify code to see all values \n')
+fprintf('Histogram of Predicted Y, ActualY \n')
+clf
+hist (PredictedYAndActualY);
+fprintf('Press enter to continue.. \n')
+pause
 
 RMSE = rmse(predictedY, testDataY);
 fprintf('RMSE for %s regression is. %f \n',algorithmName, RMSE);
