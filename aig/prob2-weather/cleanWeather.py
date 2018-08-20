@@ -9,6 +9,7 @@ import matplotlib.dates as mdates
 df = pd.read_csv("weatherHistory.csv")
 
 to_drop = ["Daily Summary", "Summary", "Precip Type"]
+#to_drop.append("Temperature (C)")
 df.drop(to_drop, inplace=True, axis=1)
 
 print(df.head())
@@ -25,4 +26,4 @@ df = df.ix[:, cols]
 
 print(df.get_dtype_counts())
 print(df.head())
-df.to_csv("weatherHistory_clean.csv", sep=',', index=False)
+df.to_csv("weatherHistory_clean.csv", sep=',', index=False, header=False)

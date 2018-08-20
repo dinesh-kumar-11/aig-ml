@@ -36,7 +36,9 @@ fprintf('Loading data ...\n');
 %Load All Data
 allData = load('house_all_clean.csv');
 allRowDataSize = size(allData,1)
-trainPercentageRows = round((90/100)*allRowDataSize)
+trainPercentageRows = round((80/100)*allRowDataSize)
+%trainPercentageRows = randi(allRowDataSize, trainPercentageRows, 1); 
+
 trainData = allData(1:trainPercentageRows,:);
 % Print out some data points
 fprintf('First 5 examples from the trainData dataset: \n');

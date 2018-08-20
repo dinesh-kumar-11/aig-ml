@@ -40,7 +40,7 @@ allData = load('weatherHistory_clean.csv');
 allData=allData(:,2:size(allData,2));
 allRowDataSize = size(allData,1)
 
-trainPercentageRows = round((80/100)*allRowDataSize)
+trainPercentageRows = round((60/100)*allRowDataSize)
 trainData = allData(1:trainPercentageRows,:);
 % Print out some data points
 fprintf('First 5 examples from the trainData dataset: \n');

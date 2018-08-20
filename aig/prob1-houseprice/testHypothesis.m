@@ -18,10 +18,20 @@ PredictedYAndActualY(1:5,:)
 fprintf('....Modify code to see all values \n')
 fprintf('Histogram of Predicted Y, ActualY \n')
 clf
-hist (PredictedYAndActualY);
+plot (PredictedYAndActualY);
+%hist (PredictedYAndActualY);
+%c = predictedY .* testDataY;
+%scatter (predictedY, testDataY,[], c);
+hold on
+
+title(algorithmName);
+legend("Predicted Y", "Actual Y");
+ylabel("Y Values")
 fprintf('Press enter to continue.. \n')
 pause
 
 RMSE = rmse(predictedY, testDataY);
 fprintf('RMSE for %s regression is. %f \n',algorithmName, RMSE);
+J = computeCostMultiError(predictedY, testDataY, theta);
+fprintf('J (cost error with trained theta) for testset in  %s regression is. %f \n',algorithmName, J);
 end
