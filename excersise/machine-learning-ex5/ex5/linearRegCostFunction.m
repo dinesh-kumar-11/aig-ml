@@ -20,13 +20,14 @@ grad = zeros(size(theta));
 %
 
 hypothises = X*theta;
-temp = sum(((hypothises-y).^2));
+squaredError = sum(((hypothises-y).^2));
+shift_theta = theta(2:size(theta));
+theta_reg = [0;shift_theta];
+regularization = (lambda/(2*m))*(sum(theta_reg.^2));
+J = ((1/(2*m))*squaredError)+regularization;    
 
-regularization = (lambda/(2*m))*(sum(theta.^2)-theta(1,1)^2);
-J = ((1/(2*m))*temp)+regularization;    
-
-
-
+theta0 = [0; theta(2:end)];
+grad = (1/m) * (X'*(hypothises-y) + (lambda * theta0));
 
 
 
