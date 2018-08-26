@@ -26,8 +26,7 @@ theta_reg = [0;shift_theta];
 regularization = (lambda/(2*m))*(sum(theta_reg.^2));
 J = ((1/(2*m))*squaredError)+regularization;    
 
-theta0 = [0; theta(2:end)];
-grad = (1/m) * (X'*(hypothises-y) + (lambda * theta0));
+grad = (1/m) * (X'*(hypothises-y) + (lambda * theta_reg));
 
 
 
