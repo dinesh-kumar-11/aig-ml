@@ -11,7 +11,7 @@ for i= 1:testSize
   predictedY(i) = testDataX(i,:)*theta;
 endfor
 
-fprintf("Predicted Price, actual Price in  %s... \n", algorithmName);
+fprintf("Predicted Y, actual Y in  %s... \n", algorithmName);
 
 PredictedYAndActualY = horzcat(predictedY, testDataY);
 PredictedYAndActualY(1:5,:)
