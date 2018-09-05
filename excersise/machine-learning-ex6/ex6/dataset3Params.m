@@ -23,9 +23,23 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+suggestedValues = [0.01 0.03 0.1 0.3 1 3 10 30];
+minimumError = Inf;
 
+for CTemp = suggestedValues
+    for sigmaTemp = suggestedValues
+    model= svmTrain(X, y, CTemp, @(x1, x2) gaussianKernel(x1, x2, sigmaTemp)); 
+    predictedY = svmPredict(model, Xval);
+    errorVal = mean(double(predictedY ~= yval));
+    if( errorVal <= minimumError )
+      C = CTemp;
+      sigma = sigmaTemp;
+      minimumError = errorVal;
+    end
+  endfor
+endfor
 
-
+fprintf("The values of C and Sigma is %f, %f", C, sigma);
 
 
 

@@ -16,6 +16,10 @@ sim = 0;
 %
 %
 
+sumsqaured = sum((x1.-x2).^2);
+temp = sumsqaured / (2*(sigma^2));
+sim = exp(-temp);
+
 
 
 
