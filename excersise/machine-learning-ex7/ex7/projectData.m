@@ -19,7 +19,9 @@ Z = zeros(size(X, 1), K);
 %
 
 
-
+Ureduce = U(:, 1:K);   
+% this is nothing but X*eigenvectors=projectedVectors
+Z = X * Ureduce;
 
 % =============================================================
 
